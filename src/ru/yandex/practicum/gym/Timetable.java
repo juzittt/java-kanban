@@ -20,9 +20,9 @@ public class Timetable {
             throw new NullPointerException("Training session cannot be null");
         }
 
-        DayOfWeek day = trainingSession.getDayOfWeek();
-        LocalTime time = trainingSession.getTimeOfDay();
-        Coach coach = trainingSession.getCoach();
+        DayOfWeek day = trainingSession.dayOfWeek();
+        LocalTime time = trainingSession.timeOfDay();
+        Coach coach = trainingSession.coach();
 
         TreeMap<LocalTime, List<TrainingSession>> dailySessions = weekTrainingSessionMap.get(day);
         dailySessions.computeIfAbsent(time, k -> new ArrayList<>()).add(trainingSession);
