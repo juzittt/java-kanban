@@ -2,7 +2,7 @@ package ru.yandex.practicum.gym;
 
 import java.util.Objects;
 
-public class TimeOfDay implements Comparable<TimeOfDay>{
+public class TimeOfDay implements Comparable<TimeOfDay> {
     private final int hours;
     private final int minutes;
 
@@ -33,8 +33,7 @@ public class TimeOfDay implements Comparable<TimeOfDay>{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TimeOfDay)) return false;
-        TimeOfDay that = (TimeOfDay) o;
+        if (!(o instanceof TimeOfDay that)) return false;
         return hours == that.hours && minutes == that.minutes;
     }
 
