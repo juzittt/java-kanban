@@ -1,12 +1,11 @@
 package ru.yandex.practicum.gym;
 
-import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Timetable {
 
-    private final Map<DayOfWeek, TreeMap<LocalTime, List<TrainingSession>>> weekTrainingSessionMap = new HashMap<>();
+    private final Map<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>> weekTrainingSessionMap = new HashMap<>();
     private final Map<Coach, Integer> coachSessions = new HashMap<>();
 
     public Timetable() {
@@ -21,20 +20,20 @@ public class Timetable {
         }
 
         DayOfWeek day = trainingSession.dayOfWeek();
-        LocalTime time = trainingSession.timeOfDay();
+        TimeOfDay time = trainingSession.timeOfDay();
         Coach coach = trainingSession.coach();
 
-        TreeMap<LocalTime, List<TrainingSession>> dailySessions = weekTrainingSessionMap.get(day);
+        TreeMap<TimeOfDay, List<TrainingSession>> dailySessions = weekTrainingSessionMap.get(day);
         dailySessions.computeIfAbsent(time, k -> new ArrayList<>()).add(trainingSession);
 
         coachSessions.merge(coach, 1, Integer::sum);
     }
 
-    public TreeMap<LocalTime, List<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
+    public TreeMap<TimeOfDay, List<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
         return weekTrainingSessionMap.get(dayOfWeek);
     }
 
-    public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, LocalTime timeOfDay) {
+    public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         List<TrainingSession> sessions = weekTrainingSessionMap.get(dayOfWeek).get(timeOfDay);
         return sessions != null ? new ArrayList<>(sessions) : Collections.emptyList();
     }
